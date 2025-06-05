@@ -41,6 +41,8 @@ function Filter({ filterField, options }) {
 
   function handleClick(value) {
     searchParams.set(filterField, value);
+    // Needed for better UX  when switching from pagination to filtering
+    searchParams.delete("page");
     setSearchParams(searchParams);
   }
 
