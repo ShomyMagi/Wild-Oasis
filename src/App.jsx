@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+
 import GlobalStyles from "./styles/GlobalStyles";
 import Dashboard from "./pages/Dashboard";
 import Account from "./pages/Account";
@@ -12,6 +13,7 @@ import Settings from "./pages/Settings";
 import Users from "./pages/Users";
 import PageNotFound from "./pages/PageNotFound";
 import Booking from "./pages/Booking";
+import Checkin from "./pages/Checkin";
 import AppLayout from "./ui/AppLayout";
 
 const queryClient = new QueryClient({
@@ -42,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/bookings/:bookingId",
         element: <Booking />,
+      },
+      {
+        path: "/checkin/:bookingId",
+        element: <Checkin />,
       },
       {
         path: "/cabins",
