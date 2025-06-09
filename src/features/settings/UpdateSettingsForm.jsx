@@ -1,13 +1,13 @@
+import { useSettings } from "./useSettings";
+import { useUpdateSettings } from "./useUpdateSettings";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import Spinner from "../../ui/Spinner";
-import { useEditSetting } from "./useEditSetting";
-import { useSettings } from "./useSettings";
 
 function UpdateSettingsForm() {
-  const { isLoading, settings } = useSettings();
-  const { isEditing, updateSetting } = useEditSetting();
+  const { settings, isLoading } = useSettings();
+  const { updateSettings, isEditing } = useUpdateSettings();
 
   if (isLoading) return <Spinner />;
 
@@ -23,7 +23,7 @@ function UpdateSettingsForm() {
 
     if (!value) return;
 
-    updateSetting({ [field]: value });
+    updateSettings({ [field]: value });
   }
 
   return (

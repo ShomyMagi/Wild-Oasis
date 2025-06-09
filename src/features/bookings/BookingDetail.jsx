@@ -1,6 +1,6 @@
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "./useBooking";
-import { useEditCheckout } from "../check-in-out/useEditCheckout";
+import { useUpdateCheckout } from "../check-in-out/useUpdateCheckout";
 import { useDeleteBooking } from "./useDeleteBooking";
 import { useNavigate } from "react-router-dom";
 import { HiArrowUpOnSquare } from "react-icons/hi2";
@@ -24,8 +24,8 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
   const { booking, isLoading } = useBooking();
-  const { checkout, isCheckingOut } = useEditCheckout();
-  const { removeBooking, isDeleting } = useDeleteBooking();
+  const { checkout, isCheckingOut } = useUpdateCheckout();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
   const moveBack = useMoveBack();
   const navigate = useNavigate();
 
@@ -78,7 +78,7 @@ function BookingDetail() {
               resourceName="booking"
               disabled={isDeleting}
               onConfirm={() =>
-                removeBooking(bookingId, {
+                deleteBooking(bookingId, {
                   onSettled: () => navigate(-1),
                 })
               }

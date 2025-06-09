@@ -1,9 +1,9 @@
+import { formatCurrency } from "../../utils/helpers";
+import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import { useDeleteCabin } from "./useDeleteCabin";
+import { useInsertCabin } from "./useInsertCabin";
 import styled from "styled-components";
 import CreateCabinForm from "./CreateCabinForm";
-import { formatCurrency } from "../../utils/helpers";
-import { useDeleteCabin } from "./useDeleteCabin";
-import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
-import { useInsertCabin } from "./useInsertCabin";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
@@ -49,8 +49,8 @@ const Discount = styled.div`
 `;
 
 function CabinRow({ cabin }) {
-  const { isDeleting, removeCabin } = useDeleteCabin();
-  const { isInserting, insertCabin } = useInsertCabin();
+  const { deleteCabin, isDeleting } = useDeleteCabin();
+  const { insertCabin, isInserting } = useInsertCabin();
 
   const {
     id: cabinId,
@@ -90,7 +90,11 @@ function CabinRow({ cabin }) {
             <Menus.Toggle id={cabinId} />
 
             <Menus.List id={cabinId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
+              <Menus.Button
+                icon={<HiSquare2Stack />}
+                onClick={handleDuplicate}
+                disabled={isInserting}
+              >
                 Duplicate
               </Menus.Button>
 
@@ -111,7 +115,7 @@ function CabinRow({ cabin }) {
               <ConfirmDelete
                 resourceName="cabins"
                 disabled={isDeleting}
-                onConfirm={() => removeCabin(cabinId)}
+                onConfirm={() => deleteCabin(cabinId)}
               />
             </Modal.Window>
           </Menus.Menu>

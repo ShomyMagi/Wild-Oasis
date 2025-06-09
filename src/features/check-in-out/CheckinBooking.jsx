@@ -1,6 +1,11 @@
+import { useEffect, useState } from "react";
+import { formatCurrency } from "../../utils/helpers";
+import { useMoveBack } from "../../hooks/useMoveBack";
+import { useUpdateCheckin } from "./useUpdateCheckin";
+import { useBooking } from "../bookings/useBooking";
+import { useSettings } from "../settings/useSettings";
 import styled from "styled-components";
 import BookingDataBox from "../../features/bookings/BookingDataBox";
-
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import ButtonGroup from "../../ui/ButtonGroup";
@@ -8,13 +13,6 @@ import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 import Spinner from "../../ui/Spinner";
 import Checkbox from "../../ui/Checkbox";
-
-import { useEffect, useState } from "react";
-import { formatCurrency } from "../../utils/helpers";
-import { useMoveBack } from "../../hooks/useMoveBack";
-import { useEditCheckin } from "./useEditCheckin";
-import { useBooking } from "../bookings/useBooking";
-import { useSettings } from "../settings/useSettings";
 
 const Box = styled.div`
   background-color: var(--color-grey-0);
@@ -27,7 +25,7 @@ function CheckinBooking() {
   const [confirmPaid, setConfirmPaid] = useState(false);
   const [addBreakfast, setAddBreakfast] = useState(false);
   const { booking, isLoading } = useBooking();
-  const { checkin, isCheckinIn } = useEditCheckin();
+  const { checkin, isCheckinIn } = useUpdateCheckin();
   const { settings, isLoading: isLoadingSettings } = useSettings();
   const moveBack = useMoveBack();
 

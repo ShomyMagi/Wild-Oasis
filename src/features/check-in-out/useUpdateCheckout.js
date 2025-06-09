@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { editBooking } from "../../services/apiBookings";
+import { updateBooking } from "../../services/apiBookings";
 import toast from "react-hot-toast";
 
-export function useEditCheckout() {
+export function useUpdateCheckout() {
   const queryClient = useQueryClient();
 
   const { mutate: checkout, isLoading: isCheckingOut } = useMutation({
     mutationFn: (bookingId) =>
-      editBooking(bookingId, {
+      updateBooking(bookingId, {
         status: "checked-out",
       }),
     // data value received from returned data from async editBooking()
@@ -22,5 +22,5 @@ export function useEditCheckout() {
     },
   });
 
-  return { isCheckingOut, checkout };
+  return { checkout, isCheckingOut };
 }

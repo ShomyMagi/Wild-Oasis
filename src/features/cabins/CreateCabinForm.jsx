@@ -1,18 +1,18 @@
 import { useForm } from "react-hook-form";
+import { useInsertCabin } from "./useInsertCabin";
+import { useUpdateCabin } from "./useUpdateCabin";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
-import { useInsertCabin } from "./useInsertCabin";
-import { useEditCabin } from "./useEditCabin";
 
 function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
-  const { isInserting, insertCabin } = useInsertCabin();
-  const { isEditing, updateCabin } = useEditCabin();
+  const { insertCabin, isInserting } = useInsertCabin();
+  const { updateCabin, isUpdating } = useUpdateCabin();
 
-  const isWorking = isInserting || isEditing;
+  const isWorking = isInserting || isUpdating;
 
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
@@ -29,7 +29,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
       updateCabin(
         { newCabinData: { ...data, image }, id: editId },
         {
-          onSuccess: (data) => {
+          onSuccess: () => {
             reset();
             onCloseModal?.();
           },
@@ -39,7 +39,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
       insertCabin(
         { ...data, image },
         {
-          onSuccess: (data) => reset(),
+          onSuccess: () => reset(),
         }
       );
     }

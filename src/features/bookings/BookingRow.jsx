@@ -8,7 +8,7 @@ import {
   HiTrash,
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import { useEditCheckout } from "../check-in-out/useEditCheckout";
+import { useUpdateCheckout } from "../check-in-out/useUpdateCheckout";
 import { useDeleteBooking } from "./useDeleteBooking";
 import styled from "styled-components";
 import Tag from "../../ui/Tag";
@@ -59,8 +59,8 @@ function BookingRow({
   },
 }) {
   const navigate = useNavigate();
-  const { checkout, isCheckingOut } = useEditCheckout();
-  const { removeBooking, isDeleting } = useDeleteBooking();
+  const { checkout, isCheckingOut } = useUpdateCheckout();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
 
   const statusToTagName = {
     unconfirmed: "blue",
@@ -134,7 +134,7 @@ function BookingRow({
           <ConfirmDelete
             resourceName="booking"
             disabled={isDeleting}
-            onConfirm={() => removeBooking(bookingId)}
+            onConfirm={() => deleteBooking(bookingId)}
           />
         </Modal.Window>
       </Modal>

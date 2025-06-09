@@ -4,10 +4,10 @@ import ButtonIcon from "../../ui/ButtonIcon";
 import SpinnerMini from "../../ui/SpinnerMini";
 
 function Logout() {
-  const { signout, isLoggingOut } = useLogout();
+  const { logout, isLoggingOut } = useLogout();
 
   return (
-    <ButtonIcon disabled={isLoggingOut} onClick={signout}>
+    <ButtonIcon disabled={isLoggingOut} onClick={logout}>
       {!isLoggingOut ? <HiOutlineLogout /> : <SpinnerMini />}
     </ButtonIcon>
   );
