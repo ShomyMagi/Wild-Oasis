@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export function useDeleteBooking() {
   const queryClient = useQueryClient();
 
-  const { mutation: removeBooking, isLoading: isDeleting } = useMutation({
+  const { mutate: removeBooking, isLoading: isDeleting } = useMutation({
     mutationFn: deleteBooking,
     onSuccess: () => {
       toast.success(`Booking successfully deleted!`);
