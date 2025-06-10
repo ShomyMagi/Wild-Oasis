@@ -14,6 +14,7 @@ export function useUser() {
   const isAuthenticated = user?.role === "authenticated";
 
   return {
+    user,
     isLoading,
     isFetching,
     isAuthenticated,

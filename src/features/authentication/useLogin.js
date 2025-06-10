@@ -8,7 +8,7 @@ export function useLogin() {
   const navigate = useNavigate();
 
   const { mutate: login, isLoading: isLoggingin } = useMutation({
-    mutationFn: ({ email, password }) => loginApi({ email, password }),
+    mutationFn: loginApi,
     onSuccess: (data) => {
       // (Optional) Manually setting/caching data into react query cache
       queryClient.setQueryData(["user"], data.user);
