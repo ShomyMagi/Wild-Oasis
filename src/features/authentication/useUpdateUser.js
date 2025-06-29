@@ -7,9 +7,13 @@ export function useUpdateUser() {
 
   const { mutate: updateUser, isLoading: isUpdating } = useMutation({
     mutationFn: updateUserApi,
-    onSuccess: () => {
+    onSuccess: ({ user }) => {
       toast.success("User successfully updated!");
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+      // server-side change (refetch data)
+      // queryClient.invalidateQueries({ queryKey: ["user"] });
+
+      // client-side update (cache update)
+      queryClient.setQueryData(["user"], user);
     },
     onError: (err) => {
       toast.error(err.message);
