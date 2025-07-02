@@ -22,10 +22,10 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // Production stale time
-      // staleTime: 60 * 1000,
+      staleTime: 60 * 1000,
 
       // Develop stale time
-      staleTime: 0,
+      // staleTime: 0,
     },
   },
 });
